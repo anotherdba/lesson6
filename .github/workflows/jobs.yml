@@ -27,15 +27,15 @@ jobs:
         run: echo ${{ needs.build-job.outputs.build-output }}
   
   build-job:
-    name: build job
-      outputs: ${{ steps.buildStep.outputs.buildout }}
+    outputs:
+      build-output: ${{ steps.buildStep.outputs.buildout }}
     
-  runs-on: ubuntu-latest
-  container:
-    image:oven/bun:slim
-  steps:
-    - name: define output variable
-      id: buildStep
-      run: |
-        bunver=$(bun --version)
-        echo "buildout=$bunver" >> "GITHUB_OUTPUT"
+    runs-on: ubuntu-latest
+    container:
+      image:oven/bun:slim
+    steps:
+      - name: define output variable
+        id: buildStep
+        run: |
+          bunver=$(bun --version)
+          echo "buildout=$bunver" >> "GITHUB_OUTPUT"
